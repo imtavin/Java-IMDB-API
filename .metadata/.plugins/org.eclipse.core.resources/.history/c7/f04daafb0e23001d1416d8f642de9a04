@@ -7,7 +7,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.concurrent.CompletableFuture;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,12 +25,11 @@ public class Request {
 	            .GET()
 	            .build();
 		
-		CompletableFuture<Void> client = HttpClient
-				.newHttpClient()
-				.sendAsync(request, BodyHandlers.ofString())
-				.thenApply(HttpResponse::statusCode)
-				.thenAccept(System.out::println);
-
-		System.out.println(client);
+		HttpResponse<String> response = (HttpResponse<String>) HttpClient
+				.newBuilder()
+				.build()
+				.send(request, BodyHandlers.ofString());
+		
+		System.out.println(response);
 	}
 }

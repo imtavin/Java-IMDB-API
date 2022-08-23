@@ -1,0 +1,32 @@
+package com.service.imdb;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+
+public class Request {
+	
+	public static void main(String[] args) throws URISyntaxException {
+		
+		String apiKey = "k_5bivjc99";
+		
+		HttpClient client = HttpClient
+				.newBuilder()
+				.build();
+			
+		HttpRequest request = HttpRequest
+	            .newBuilder()
+	            .uri(new URI("https://imdb-api.com/en/API/Top250Movies/"+apiKey))
+	            .header("X-RapidAPI-Key",apiKey )
+	            .GET()
+	            .build();
+		
+		
+//		HttpResponse response = client.newCall(request).execute();
+		
+		System.out.println(request);
+	}
+}

@@ -7,7 +7,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.concurrent.CompletableFuture;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +14,7 @@ import org.json.JSONObject;
 
 public class Request {
 	
-	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException, JSONException {
 		
 		String apiKey = "k_5bivjc99";
 			
@@ -26,12 +25,11 @@ public class Request {
 	            .GET()
 	            .build();
 		
-		CompletableFuture<Void> client = HttpClient
-				.newHttpClient()
-				.sendAsync(request, BodyHandlers.ofString())
-				.thenApply(HttpResponse::statusCode)
-				.thenAccept(System.out::println);
-
-		System.out.println(client);
+		JSONObject response = (JSONObject) HttpClient
+				.newBuilder()
+				.build()
+				.send(request, BodyHandlers.ofString());
+		
+		System.out.println(response.toString(4));
 	}
 }

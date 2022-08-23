@@ -32,6 +32,6 @@ public class Request {
 				.thenApply(HttpResponse::statusCode)
 				.thenAccept(System.out::println);
 
-		System.out.println(client);
+//		System.out.println(response);
 	}
 }
