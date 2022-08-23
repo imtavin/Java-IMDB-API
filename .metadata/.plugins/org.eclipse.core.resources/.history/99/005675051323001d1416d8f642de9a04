@@ -15,12 +15,10 @@ import org.json.JSONObject;
 
 public class Request {
 	
-	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException, JSONException {
+	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
 		
-		String apiKey = "API_KEY";
-		
-		HttpClient client = HttpClient.newHttpClient();
-		
+		String apiKey = "k_5bivjc99";
+			
 		HttpRequest request = HttpRequest
 	            .newBuilder()
 	            .uri(new URI("https://imdb-api.com/en/API/Top250Movies/"+apiKey))
@@ -28,21 +26,12 @@ public class Request {
 	            .GET()
 	            .build();
 		
-		StringBuilder jsonStr = new StringBuilder();
-		
-		client.sendAsync(request, BodyHandlers.ofString())
-				.thenApply(HttpResponse::body)
-				.thenAccept( c -> jsonStr.append(c))
-				.join();
-		
-		JSONObject json = new JSONObject(jsonStr.toString());
-		
-		
-		
-//		System.out.println(jsonStr.toString());
-		
-		System.out.println(json.toString(5));
+		CompletableFuture<Void> client = HttpClient
+				.newHttpClient()
+				.sendAsync(request, BodyHandlers.ofString())
+				.thenApply(HttpResponse::statusCode)
+				.thenAccept(System.out::println);
+
+		System.out.println(client);
 	}
-
-
 }

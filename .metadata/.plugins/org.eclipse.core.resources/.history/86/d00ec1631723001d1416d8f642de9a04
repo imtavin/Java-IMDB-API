@@ -17,7 +17,7 @@ public class Request {
 	
 	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException, JSONException {
 		
-		String apiKey = "API_KEY";
+		String apiKey = "k_5bivjc99";
 		
 		HttpClient client = HttpClient.newHttpClient();
 		
@@ -41,7 +41,7 @@ public class Request {
 		
 //		System.out.println(jsonStr.toString());
 		
-		System.out.println(json.toString(5));
+		System.out.println(json.toString());
 	}
 
 
