@@ -1,0 +1,13 @@
+package com.service.test;
+
+public class ImdbTest {
+
+	void retornaJsonImdb (){
+		
+		var json = new Imdb();
+		new impresaoJson(json);
+		
+		
+	}
+
+}

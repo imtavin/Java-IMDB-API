@@ -1,0 +1,15 @@
+package com.service.test;
+
+import com.service.imdb.Request;
+import com.service.imdb.impresaoJson;
+import org.json.JSONObject;
+
+public class RequestTest {
+
+	void retornaJsonImdb (){
+		
+		
+		
+	}
+
+}
