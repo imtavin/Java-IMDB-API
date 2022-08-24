@@ -6,6 +6,10 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,8 +19,28 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 		JSONObject json = RequestTopMovies();
-	
-		System.out.println(json.toString(5));
+		
+		List<String> titleList = new ArrayList<String>();
+		List<String> urlImagesList = new ArrayList<String>();
+		List<Double> ratingList = new ArrayList<Double>();
+		List<Integer> yearsList = new ArrayList<Integer>();
+		
+		JSONArray jsonArr = json.getJSONArray("items");
+		
+		for (int i = 0; i < jsonArr.length(); i++) {
+		    JSONObject jsonobject = jsonArr.getJSONObject(i);
+		    titleList.add(jsonobject.getString("title"));
+		    urlImagesList.add(jsonobject.getString("image"));
+		    ratingList.add(jsonobject.getDouble("imDbRating"));
+		    yearsList.add(jsonobject.getInt("year"));
+		}
+		
+//		System.out.println(titleList);
+//		System.out.println(urlImagesList);
+//		System.out.println(ratingList);
+//		System.out.println(yearsList);
+		
+		;
 		
 	}
 
