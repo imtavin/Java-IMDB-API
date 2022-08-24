@@ -20,33 +20,20 @@ public class Main {
 		
 		JSONObject json = RequestTopMovies();
 		
-		List<String> titleList = new ArrayList<String>();
-		List<String> urlImagesList = new ArrayList<String>();
-		List<Double> ratingList = new ArrayList<Double>();
-		List<Integer> yearsList = new ArrayList<Integer>();
+		List titleList = JSONtoList(json, "title");
+		List urlImageList = JSONtoList(json, "image");
+		List ratingList = JSONtoList(json, "imDbRating");
+		List yearList = JSONtoList(json, "year");
 		
-		JSONArray jsonArr = json.getJSONArray("items");
-		
-		for (int i = 0; i < jsonArr.length(); i++) {
-		    JSONObject jsonobject = jsonArr.getJSONObject(i);
-		    titleList.add(jsonobject.getString("title"));
-		    urlImagesList.add(jsonobject.getString("image"));
-		    ratingList.add(jsonobject.getDouble("imDbRating"));
-		    yearsList.add(jsonobject.getInt("year"));
-		}
-		
-//		System.out.println(titleList);
-//		System.out.println(urlImagesList);
-//		System.out.println(ratingList);
-//		System.out.println(yearsList);
-		
-		;
-		
+		System.out.println(titleList);
+		System.out.println(urlImageList);
+		System.out.println(ratingList);
+		System.out.println(yearList);
 	}
 
 
 	public static JSONObject RequestTopMovies() throws JSONException, URISyntaxException {
-		String apiKey = "API_KEY";
+		String apiKey = "k_5bivjc99";
 		
 		HttpClient client = HttpClient.newHttpClient();
 		
@@ -67,6 +54,22 @@ public class Main {
 		JSONObject json = new JSONObject(jsonStr.toString());
 		
 		return json;
+		
+	}
+	
+	public static List<Object> JSONtoList(JSONObject json, String name) throws JSONException {
+		
+		List<Object>  list = new ArrayList<Object>();
+
+		
+		JSONArray jsonArr = json.getJSONArray("items");
+		
+		for (int i = 0; i < jsonArr.length(); i++) {
+		    JSONObject jsonobject = jsonArr.getJSONObject(i);
+		    list.add(jsonobject.getString(name));
+		}
+		
+		return list;
 		
 	}
 
