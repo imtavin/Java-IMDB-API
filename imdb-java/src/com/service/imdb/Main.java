@@ -33,7 +33,7 @@ public class Main {
 
 
 	public static JSONObject RequestTopMovies() throws JSONException, URISyntaxException {
-		String apiKey = "k_5bivjc99";
+		String apiKey = "API_KEY";
 		
 		HttpClient client = HttpClient.newHttpClient();
 		
